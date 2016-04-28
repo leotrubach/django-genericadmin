@@ -85,10 +85,10 @@ class BaseGenericModelAdmin(object):
                 return self.admin_site.admin_view(view)(*args, **kwargs)
             return update_wrapper(wrapper, view)
         
-        custom_urls = patterns('',
+        custom_urls = [
             url(r'^obj-data/$', wrap(self.generic_lookup), name='admin_genericadmin_obj_lookup'),
             url(r'^genericadmin-init/$', wrap(self.genericadmin_js_init), name='admin_genericadmin_init'),
-        )
+        ]
         return custom_urls + super(BaseGenericModelAdmin, self).get_urls()
             
     def genericadmin_js_init(self, request):
